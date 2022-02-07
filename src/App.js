@@ -17,6 +17,20 @@ class App extends Component {
     ],
     filter: "",
   };
+
+componentDidMount(){
+  console.log(this.state.contacts);
+  const contacts=JSON.parse(localStorage.getItem("contacts"))||this.state.contacts;
+  console.log(contacts);
+  this.setState({ contacts});
+}
+
+componentDidUpdate(prevProps, prevState){
+  if (prevState.contacts !== this.state.contacts){
+    localStorage.setItem("contacts", JSON.stringify(this.state.contacts));
+  }
+}
+
   formSubmitHandler = (contact) => {
     if (
       this.state.contacts
@@ -34,7 +48,7 @@ class App extends Component {
 
   addContact = (newContact) => {
     this.setState((prev) => ({
-      contacts: [...prev.contacts, { ...newContact, id: nanoid() }],
+      contacts: [...prev.contacts, {id: nanoid(), ...newContact  }],
     }));
   };
 
