@@ -1,0 +1,111 @@
+.App {
+  text-align: center;
+}
+.AppHeader,
+h2 {
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+  text-shadow: 4px 4px 2px rgba(255, 255, 255, 0.12),
+    1px 2px 3px rgba(255, 255, 255, 0.08), 3px 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid white;
+  padding: 20px;
+  border-radius: 5px;
+}
+label {
+  font-size: 30px;
+  font-weight: 500;
+  color: white;
+  font-size: calc(4px + 2vmin);
+  margin-bottom: 20px;
+}
+input {
+  margin-left: 10px;
+  margin-right: 10px;
+  padding: 7px;
+  height: auto;
+  font-size: calc(4px + 2vmin);
+  border-radius: 5px;
+  box-shadow: 0px 4px 4px 0px rgba(255, 255, 255, 0.12),
+    0px 1px 2px 0px rgba(255, 255, 255, 0.08),
+    0px 3px 1px 0px rgba(255, 255, 255, 0.1);
+   outline: none;
+  &:focus,
+  &:hover {
+    outline: auto;
+    outline-color: rgb(55, 177, 214);
+  }
+  &.name {
+    width: 250px;
+  }
+  &.number {
+    width: 130px;
+  }
+}
+
+button {
+  width: 160px;
+  height: auto;
+  padding: 7px;
+  background-color: white;
+  color: #282c34;
+  font-size: calc(2px + 2vmin);
+  font-weight: 700;
+  border-radius: 5px;
+  box-shadow: 0px 2px 2px 0px rgba(255, 255, 255, 0.12),
+    0px 1px 2px 0px rgba(255, 255, 255, 0.08),
+    0px 3px 1px 0px rgba(255, 255, 255, 0.1);
+  cursor: pointer;
+  &:hover {
+    color: rgb(55, 177, 214);
+  }
+}
+.btn {
+  width: 50px;
+  height: 30px;
+  padding: 3px;
+}
+
+.item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 7px;
+  min-width: 320px;
+  height: auto;
+  margin-bottom: 10px;
+  color: white;
+  border-radius: 5px;
+  font-size: calc(4px + 2vmin);
+  line-height: 1.2;
+  box-shadow: 0px 4px 4px 0px rgba(255, 255, 255, 0.12),
+    0px 1px 2px 0px rgba(255, 255, 255, 0.08),
+    0px 3px 1px 0px rgba(255, 255, 255, 0.1);
+}
+.list {
+  list-style: circle;
+  padding: 10px;
+}
+
+p {
+  margin: 0 20px 0 0;
+}
+.find {
+  color: white;
+  margin-bottom: 10px;
+}
