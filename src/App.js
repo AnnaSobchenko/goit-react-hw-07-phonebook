@@ -7,6 +7,7 @@ import Form from './Components/Form/Form.jsx';
 import PropTypes from 'prop-types';
 import { Notify } from 'notiflix';
 
+
 const contactsDefault = [
   { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
   { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
