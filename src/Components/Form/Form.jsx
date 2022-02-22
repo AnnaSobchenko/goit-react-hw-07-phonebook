@@ -1,34 +1,41 @@
+import { Notify } from 'notiflix';
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
+import { addContact } from 'redux/contacts/contactsActions';
 
-const Form = ({ onSubmit }) => {
-  const [name, setName] = useState('');
-  const [number, setNumber] = useState('');
+const Form = () => {
+const dispatch=useDispatch();
+  const [form, setForm]=useState({
+    name:"",
+    number:"",
+  })
+
+  const items=useSelector(state=>state.contacts.items)
 
   const handleSubmit = e => {
     e.preventDefault();
-    onSubmit({ name, number });
-    reset();
-  };
-
-  const reset = () => {
-    setName('');
-    setNumber('');
+    if (
+      items.map(el => el.name === form.name).filter(el => el === true)
+        .length
+    ) {
+      Notify.info(`${form.name} is already in contact`, {
+        timeout: 3000,
+      });
+    } else {
+      Notify.success(`${form.name} is added`, { timeout: 3000 });
+      setForm({name:'',number:""});
+      return dispatch(addContact(form));
+    }
+    setForm({name:'',number:""});
   };
 
   const handleChange = e => {
     const { name, value } = e.currentTarget;
-    switch (name) {
-      case 'name':
-        setName(value);
-        break;
-      case 'number':
-        setNumber(value);
-        break;
-      default:
-        return;
-    }
+    setForm((prev)=>({...prev, [name]:value}))    
   };
 
+  const { name, number } =form;
   return (
     <form className="form" onSubmit={handleSubmit}>
       <label>

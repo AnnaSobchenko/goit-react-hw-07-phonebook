@@ -1,11 +1,19 @@
 import PropTypes from 'prop-types';
+import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
+import { removeContact } from 'redux/contacts/contactsActions';
 
-const Filter = ({ contacts, filter, removeContact }) => {
-  let filterNameArr = contacts.filter(contact =>
-    contact.name.toLowerCase().includes(filter.toLocaleLowerCase())
-  );
+const Filter = () => {
+  const { items, filter } = useSelector(state => state.contacts);    
+  const dispatch = useDispatch();
+
+  let filterNameArr = items.filter(contact => {
+    console.log(contact.name);
+    return contact.name.toLowerCase().includes(filter.toLocaleLowerCase());
+  });
+
   if (!filterNameArr) {
-    filterNameArr = contacts;
+    filterNameArr = items;
   }
   return filterNameArr.map(el => {
     return (
@@ -13,7 +21,7 @@ const Filter = ({ contacts, filter, removeContact }) => {
         <p>
           {el.name}: {el.number}
         </p>
-        <button className="btn" onClick={() => removeContact(el.id)}>
+        <button className="btn" onClick={() => dispatch(removeContact(el.id))}>
           Del
         </button>
       </li>

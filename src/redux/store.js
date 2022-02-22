@@ -10,13 +10,14 @@ import {
   PURGE,
   REGISTER,
 } from 'redux-persist';
+import storage from 'redux-persist/lib/storage'
 
 const contactsPersistConfig = {
-  contacts: {
-    contacts: [],
-    filter: '',
-  },
-};
+  key: 'items',
+  version: 1,
+  storage,
+  whitelist:['items']
+}
 
 const contactsPersistedReducer = persistReducer(
   contactsPersistConfig,

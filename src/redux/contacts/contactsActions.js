@@ -3,12 +3,12 @@ import { nanoid } from 'nanoid';
 
 export const addContact = createAction('contact/addContact', dataForm => {
   return {
-    playload: { ...dataForm, id: nanoid() },
+    payload: { ...dataForm, id: nanoid() },
   };
 });
-export const filterContacts = createAction('contacts/filterContacts', e => {
-  return {
-    playload: e.target.value,
+export const filterInput = createAction('contacts/filterInput', e => {
+  return {    
+    payload: e.target.value,
   };
 });
 export const removeContact = createAction('contacts/removeContact');
