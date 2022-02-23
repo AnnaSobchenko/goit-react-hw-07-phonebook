@@ -7,8 +7,10 @@ export const addContact = createAction('contact/addContact', dataForm => {
   };
 });
 export const filterInput = createAction('contacts/filterInput', e => {
-  return {    
+  return {
     payload: e.target.value,
   };
 });
 export const removeContact = createAction('contacts/removeContact');
+
+export const getContacts = createAction('contacts/getContacts');

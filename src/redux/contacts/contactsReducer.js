@@ -1,21 +1,41 @@
 import { createReducer, combineReducers } from '@reduxjs/toolkit';
-import { addContact, filterInput, removeContact } from './contactsActions';
+import {
+  addContact,
+  filterInput,
+  getContacts,
+  removeContact,
+} from './contactsActions';
 
 const initialContact = [];
 
 const contactsReducer = createReducer(initialContact, {
-  [addContact]: (state, { payload }) => [...state, payload],
-  [removeContact]: (state, { payload }) =>
+  [getContacts.fulfilled]: (_, { payload }) => payload,
+  [addContact.fulfilled]: (state, { payload }) => [...state, payload],
+  [removeContact.fulfilled]: (state, { payload }) =>
     state.filter(el => el.id !== payload),
 });
 
 const filterReducer = createReducer('', {
-  [filterInput]: (_, { payload }) => payload,
+  [filterInput.fulfilled]: (_, { payload }) => payload,
 });
 
-const phonebookReducer = combineReducers({
+const isLoadingReducer = createReducer(false, {
+  [addContact.pending]: () => true,
+  [addContact.fulfilled]: () => false,
+  [addContact.rejected]: () => false,
+  [getContacts.pending]: () => true,
+  [getContacts.fulfilled]: () => false,
+  [getContacts.rejected]: () => false,
+  [removeContact.pending]: () => true,
+  [removeContact.fulfilled]: () => false,
+  [removeContact.rejected]: () => false,
+  [filterReducer.pending]: () => true,
+  [filterReducer.fulfilled]: () => false,
+  [filterReducer.rejected]: () => false,
+});
+
+export const phonebookReducer = combineReducers({
   items: contactsReducer,
   filter: filterReducer,
+  isLoading: isLoadingReducer,
 });
-
-export default phonebookReducer;

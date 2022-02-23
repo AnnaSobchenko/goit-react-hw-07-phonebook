@@ -3,17 +3,25 @@ import ContactList from './Components/ContactList/ContactList.jsx';
 import Filter from './Components/Filter/Filter.jsx';
 import Form from './Components/Form/Form.jsx';
 import PropTypes from 'prop-types';
+import { useDispatch } from 'react-redux';
+import { useEffect } from 'react';
+import { getContact } from 'redux/contacts/contactsOperations';
 
 const App = () => {
- 
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getContact());
+  }, [dispatch]);
+
   return (
     <div className="App">
       <header className="AppHeader">
         <h2>Phonebook</h2>
       </header>
       <main className="main">
-        <Form  />
-        <ContactList  />
+        <Form />
+        <ContactList />
         <ul className="list">
           <Filter />
         </ul>

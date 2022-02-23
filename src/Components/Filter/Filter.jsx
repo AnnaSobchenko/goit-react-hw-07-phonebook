@@ -1,10 +1,9 @@
 import PropTypes from 'prop-types';
-import { useDispatch } from 'react-redux';
-import { useSelector } from 'react-redux';
-import { removeContact } from 'redux/contacts/contactsActions';
+import { useDispatch, useSelector } from 'react-redux';
+import { removeContact } from 'redux/contacts/contactsOperations';
 
 const Filter = () => {
-  const { items, filter } = useSelector(state => state.contacts);    
+  const { items, filter } = useSelector(state => state.contacts);
   const dispatch = useDispatch();
 
   let filterNameArr = items.filter(contact => {
