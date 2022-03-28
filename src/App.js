@@ -5,23 +5,24 @@ import Form from './Components/Form/Form.jsx';
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
-import { getContact } from 'redux/contacts/contactsOperations';
+import { getContacts } from 'redux/contacts/contactsOperations';
 
 const App = () => {
-  const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(getContact());
-  }, [dispatch]);
+  const dispatch=useDispatch();
 
+  useEffect(()=>{
+    dispatch(getContacts());
+  },[dispatch]);
+ 
   return (
     <div className="App">
       <header className="AppHeader">
         <h2>Phonebook</h2>
       </header>
       <main className="main">
-        <Form />
-        <ContactList />
+        <Form  />
+        <ContactList  />
         <ul className="list">
           <Filter />
         </ul>

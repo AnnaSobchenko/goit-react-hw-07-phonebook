@@ -2,40 +2,40 @@ import { Notify } from 'notiflix';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
-import { addContact } from 'redux/contacts/contactsActions';
+import { addContact } from 'redux/contacts/contactsOperations';
 
 const Form = () => {
-const dispatch=useDispatch();
-  const [form, setForm]=useState({
-    name:"",
-    number:"",
-  })
+  const dispatch = useDispatch();
+  const [form, setForm] = useState({
+    name: '',
+    phone: '',
+  });
 
-  const items=useSelector(state=>state.contacts.items)
-
+  const items = useSelector(state => state.contacts.items);
+  console.log(items);
+  
   const handleSubmit = e => {
     e.preventDefault();
     if (
-      items.map(el => el.name === form.name).filter(el => el === true)
-        .length
+      items.map(el => el.name === form.name).filter(el => el === true).length
     ) {
       Notify.info(`${form.name} is already in contact`, {
         timeout: 3000,
       });
     } else {
       Notify.success(`${form.name} is added`, { timeout: 3000 });
-      setForm({name:'',number:""});
+      setForm({ name: '', phone: '' });
       return dispatch(addContact(form));
     }
-    setForm({name:'',number:""});
+    setForm({ name: '', phone: '' });
   };
 
   const handleChange = e => {
     const { name, value } = e.currentTarget;
-    setForm((prev)=>({...prev, [name]:value}))    
+    setForm(prev => ({ ...prev, [name]: value }));
   };
 
-  const { name, number } =form;
+  const { name, phone } = form;
   return (
     <form className="form" onSubmit={handleSubmit}>
       <label>
@@ -56,8 +56,8 @@ const dispatch=useDispatch();
         <input
           className="number"
           type="tel"
-          name="number"
-          value={number}
+          name="phone"
+          value={phone}
           placeholder="XXX-XX-XX"
           pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
           title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
