@@ -13,7 +13,7 @@ const Form = () => {
 
   const items = useSelector(state => state.contacts.items);
   console.log(items);
-  
+
   const handleSubmit = e => {
     e.preventDefault();
     if (

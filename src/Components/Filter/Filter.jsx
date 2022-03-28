@@ -1,37 +1,30 @@
 import PropTypes from 'prop-types';
-import { useDispatch, useSelector } from 'react-redux';
-import { getContacts, removeContact } from 'redux/contacts/contactsOperations';
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { filterInput } from 'redux/contacts/contactsActions';
 
 const Filter = () => {
-  const {items, filter } = useSelector(state => state.contacts);
   const dispatch = useDispatch();
-console.log(filter);
-// const items=dispatch(getContacts());
-  let filterNameArr = items.filter(contact => {
-    console.log(contact.name);
-    return contact.name.toLowerCase().includes(filter.toLocaleLowerCase());
-  });
-
-  if (!filterNameArr) {
-    filterNameArr = items;
-  }
-  return filterNameArr.map(el => {
-    return (
-      <li key={el.id} className="item">
-        <p>
-          {el.name}: {el.phone}
-        </p>
-        <button className="btn" onClick={() => dispatch(removeContact(el.id))}>
-          Del
-        </button>
-      </li>
-    );
-  });
+  const filter = useSelector(state => state.contacts.filter);
+  return (
+    <>
+      <h2>Contacts</h2>
+      <p className="find">Find contacts by name</p>
+      <input
+        className="filter"
+        type="text"
+        name="filter"
+        value={filter}
+        pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
+        title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
+        required
+        placeholder="&#x1f50d; Search..."
+        onChange={e => dispatch(filterInput(e))}
+      />
+    </>
+  );
 };
 Filter.propTypes = {
-  name: PropTypes.string,
-  number: PropTypes.string,
   filter: PropTypes.string,
-  contacts: PropTypes.array,
 };
 export default Filter;

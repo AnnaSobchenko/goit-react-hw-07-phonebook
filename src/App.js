@@ -6,25 +6,26 @@ import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { getContacts } from 'redux/contacts/contactsOperations';
+const { Rings } = require('react-loader-spinner');
 
 const App = () => {
+  const dispatch = useDispatch();
 
-  const dispatch=useDispatch();
-
-  useEffect(()=>{
+  useEffect(() => {
     dispatch(getContacts());
-  },[dispatch]);
- 
+  }, [dispatch]);
+
   return (
     <div className="App">
       <header className="AppHeader">
         <h2>Phonebook</h2>
       </header>
       <main className="main">
-        <Form  />
-        <ContactList  />
+        <Form />
+        <Filter />
         <ul className="list">
-          <Filter />
+          {/* isLoading&&<Rings heigth="34" width="100%" color="#fff" ariaLabel='loading' /> */}
+          <ContactList />
         </ul>
       </main>
     </div>
